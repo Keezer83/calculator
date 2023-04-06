@@ -1,7 +1,9 @@
-let numbers = [];
-let operators = [];
-let result = 0;
+let firstNumber;
+let secondNumber;
+let operator;
+let result;
 let memory = 0;
+let userInput = document.getElementById("userInput");
 
 function getNumbers() {
   const numZero = document.getElementById("0");
@@ -42,7 +44,7 @@ function getOperators() {
   subtract.addEventListener("click", addEquationOperator);
   multiply.addEventListener("click", addEquationOperator);
   divide.addEventListener("click", addEquationOperator);
-  equals.addEventListener("click", createEquation);
+  equals.addEventListener("click", showAnswer);
   clear.addEventListener("click", clearInput);
   memoryClear.addEventListener("click", memoryStorage);
   memorySave.addEventListener("click", memoryStorage);
@@ -63,31 +65,43 @@ function memoryStorage() {
   } else {
     memory = 0;
   }
-  console.log(memory);
-  console.log(this.id);
 }
 
 function insertToUserInput() {
-  let userInput = document.getElementById("userInput");
   userInput.value = userInput.value + +this.id;
 }
 
 function addEquationOperator() {
-  numbers.push(+userInput.value);
-  operators.push(this.id);
+  if (firstNumber === undefined) {
+    firstNumber = +userInput.value;
+    operator = this.id;
+  } else {
+    secondNumber = +userInput.value;
+    calculate();
+    operator = this.id;
+    firstNumber = result;
+    console.log("firstNumber updated to " + result);
+  }
   userInput.value = "";
 }
 
-function createEquation() {
-  numbers.push(+userInput.value);
-  let i = 0;
-  while (i < operators.length) {
-    console.log(numbers.join(operators[i]));
-    i++;
+function calculate() {
+  if (operator === "+" && secondNumber != undefined) {
+    result = firstNumber + secondNumber;
+  } else if (operator === "-" && secondNumber != undefined) {
+    result = firstNumber - secondNumber;
+  } else if (operator === "x" && secondNumber != undefined) {
+    result = firstNumber * secondNumber;
+  } else if (operator === "÷" && secondNumber != undefined) {
+    result = firstNumber / secondNumber;
   }
-  userInput.value = "";
-  console.log(numbers);
-  console.log(operators);
+  console.log("calculate function result " + result);
+}
+
+function showAnswer() {
+  secondNumber = +userInput.value;
+  calculate();
+  userInput.value = result;
 }
 
 getNumbers();
