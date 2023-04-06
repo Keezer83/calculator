@@ -1,8 +1,8 @@
-const calculation = {
-  currentUserNumber: "",
-  currentOperator: "",
-  currentEquation: "",
-};
+let numbers = [];
+let operators = [];
+let result = 0;
+let memory = 0;
+
 function getNumbers() {
   const numZero = document.getElementById("0");
   const numOne = document.getElementById("1");
@@ -32,27 +32,62 @@ function getOperators() {
   const subtract = document.getElementById("-");
   const multiply = document.getElementById("x");
   const divide = document.getElementById("÷");
+  const equals = document.getElementById("=");
+  const clear = document.getElementById("c");
+  const memoryClear = document.getElementById("mc");
+  const memorySave = document.getElementById("ms");
+  const memoryRecall = document.getElementById("mr");
 
-  plus.addEventListener("click", addEquationOperation);
-  subtract.addEventListener("click", addEquationOperation);
-  multiply.addEventListener("click", addEquationOperation);
-  divide.addEventListener("click", addEquationOperation);
+  plus.addEventListener("click", addEquationOperator);
+  subtract.addEventListener("click", addEquationOperator);
+  multiply.addEventListener("click", addEquationOperator);
+  divide.addEventListener("click", addEquationOperator);
+  equals.addEventListener("click", createEquation);
+  clear.addEventListener("click", clearInput);
+  memoryClear.addEventListener("click", memoryStorage);
+  memorySave.addEventListener("click", memoryStorage);
+  memoryRecall.addEventListener("click", memoryStorage);
+}
+
+function clearInput() {
+  userInput.value = "";
+}
+
+function memoryStorage() {
+  if (this.id === "ms") {
+    memory = +userInput.value;
+    userInput.value = "";
+    alert(`${memory} has been saved for later use`);
+  } else if (this.id === "mr") {
+    userInput.value = +memory;
+  } else {
+    memory = 0;
+  }
+  console.log(memory);
+  console.log(this.id);
 }
 
 function insertToUserInput() {
   let userInput = document.getElementById("userInput");
   userInput.value = userInput.value + +this.id;
-  console.log(userInput.value);
 }
 
-function addEquationOperation() {
-  calculation.currentUserNumber = userInput.value;
-  calculation.currentOperator = this.id;
-  calculation.currentEquation =
-    +calculation.currentUserNumber + " " + calculation.currentOperator;
+function addEquationOperator() {
+  numbers.push(+userInput.value);
+  operators.push(this.id);
   userInput.value = "";
-  console.log(calculation.currentEquation);
-  console.log(this.id);
+}
+
+function createEquation() {
+  numbers.push(+userInput.value);
+  let i = 0;
+  while (i < operators.length) {
+    console.log(numbers.join(operators[i]));
+    i++;
+  }
+  userInput.value = "";
+  console.log(numbers);
+  console.log(operators);
 }
 
 getNumbers();
