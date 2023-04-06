@@ -6,27 +6,10 @@ let memory = 0;
 let userInput = document.getElementById("userInput");
 
 function getNumbers() {
-  const numZero = document.getElementById("0");
-  const numOne = document.getElementById("1");
-  const numTwo = document.getElementById("2");
-  const numThree = document.getElementById("3");
-  const numFour = document.getElementById("4");
-  const numFive = document.getElementById("5");
-  const numSix = document.getElementById("6");
-  const numSeven = document.getElementById("7");
-  const numEight = document.getElementById("8");
-  const numNine = document.getElementById("9");
-
-  numZero.addEventListener("click", insertToUserInput);
-  numOne.addEventListener("click", insertToUserInput);
-  numTwo.addEventListener("click", insertToUserInput);
-  numThree.addEventListener("click", insertToUserInput);
-  numFour.addEventListener("click", insertToUserInput);
-  numFive.addEventListener("click", insertToUserInput);
-  numSix.addEventListener("click", insertToUserInput);
-  numSeven.addEventListener("click", insertToUserInput);
-  numEight.addEventListener("click", insertToUserInput);
-  numNine.addEventListener("click", insertToUserInput);
+  for (let i = 0; i < 10; i++) {
+    const num = document.getElementById(String(i));
+    num.addEventListener("click", insertToUserInput);
+  }
 }
 
 function getOperators() {
@@ -53,6 +36,10 @@ function getOperators() {
 
 function clearInput() {
   userInput.value = "";
+  firstNumber;
+  secondNumber;
+  console.log(firstNumber);
+  console.log(secondNumber);
 }
 
 function memoryStorage() {
