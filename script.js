@@ -10,6 +10,8 @@ function getNumbers() {
     const num = document.getElementById(String(i));
     num.addEventListener("click", insertToUserInput);
   }
+  const decimal = document.getElementById("decimal");
+  decimal.addEventListener("click", insertToUserInput);
 }
 
 function getOperators() {
@@ -36,10 +38,8 @@ function getOperators() {
 
 function clearInput() {
   userInput.value = "";
-  firstNumber;
-  secondNumber;
-  console.log(firstNumber);
-  console.log(secondNumber);
+  firstNumber = undefined;
+  secondNumber = undefined;
 }
 
 function memoryStorage() {
@@ -89,6 +89,8 @@ function showAnswer() {
   secondNumber = +userInput.value;
   calculate();
   userInput.value = result;
+  firstNumber = undefined;
+  secondNumber = undefined;
 }
 
 getNumbers();
