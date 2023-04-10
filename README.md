@@ -2,7 +2,7 @@
 
 <br>
 
-_Cause sometimes there aren't enough finger calculators for the problem at hand_
+_Cause sometimes there aren't enough finger calculators for the problem at hand ✋🏼_
 
 <br>
 
