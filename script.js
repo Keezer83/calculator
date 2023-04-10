@@ -1,3 +1,4 @@
+//create initial variables used to store the numbers and operators for the equations
 let firstNumber;
 let secondNumber;
 let operator;
@@ -5,15 +6,16 @@ let result;
 let memory = 0;
 let userInput = document.getElementById("userInput");
 
+//get the number button values
 function getNumbers() {
-  for (let i = 0; i < 10; i++) {
-    const num = document.getElementById(String(i));
-    num.addEventListener("click", insertToUserInput);
+  const numberButtons = document.getElementsByClassName("number-btn");
+  for (let i = 0; i < numberButtons.length; i++) {
+    const btn = numberButtons[i];
+    btn.addEventListener("click", insertToUserInput);
   }
-  const decimal = document.getElementById("decimal");
-  decimal.addEventListener("click", insertToUserInput);
 }
 
+//get the operator values for the calculator and the memory buttons
 function getOperators() {
   const plus = document.getElementById("+");
   const subtract = document.getElementById("-");
@@ -36,12 +38,14 @@ function getOperators() {
   memoryRecall.addEventListener("click", memoryStorage);
 }
 
+//clear the input field to be ready for a new operation
 function clearInput() {
   userInput.value = "";
   firstNumber = undefined;
   secondNumber = undefined;
 }
 
+//memory storage function for the memory buttons
 function memoryStorage() {
   if (this.id === "ms") {
     memory = +userInput.value;
@@ -54,10 +58,12 @@ function memoryStorage() {
   }
 }
 
+//create the number inside the input field to be used in your equation
 function insertToUserInput() {
-  userInput.value = userInput.value + +this.id;
+  userInput.value = userInput.value + this.value;
 }
 
+//prepare equation values in the variables
 function addEquationOperator() {
   if (firstNumber === undefined) {
     firstNumber = +userInput.value;
@@ -67,11 +73,11 @@ function addEquationOperator() {
     calculate();
     operator = this.id;
     firstNumber = result;
-    console.log("firstNumber updated to " + result);
   }
   userInput.value = "";
 }
 
+//calculate your equation and get the result while resetting the calculator for a new operation
 function calculate() {
   if (operator === "+" && secondNumber != undefined) {
     result = firstNumber + secondNumber;
@@ -82,9 +88,9 @@ function calculate() {
   } else if (operator === "÷" && secondNumber != undefined) {
     result = firstNumber / secondNumber;
   }
-  console.log("calculate function result " + result);
 }
 
+//return the answer when selecting equals
 function showAnswer() {
   secondNumber = +userInput.value;
   calculate();

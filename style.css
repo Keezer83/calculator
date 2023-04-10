@@ -1,0 +1,33 @@
+body {
+  display: flex;
+  justify-content: center;
+}
+#calculator input {
+  border: 2px solid blue;
+  width: fit-content;
+  background-color: rgb(255, 255, 255);
+}
+#calculator {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 2px solid red;
+  max-width: fit-content;
+  background-color: #baba;
+}
+.numbers,
+.operators {
+  display: flex;
+  border: 2px solid green;
+  flex-direction: column;
+}
+.button-inputs {
+  display: flex;
+  flex-direction: row;
+  border: 2px solid blueviolet;
+}
+.numbers {
+}
+button {
+  border: none;
+}
